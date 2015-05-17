@@ -1,0 +1,6 @@
+# ignore all SQLITE fiels
+*.sqlite3
+
+# temp directory
+/temp
+/.tags
