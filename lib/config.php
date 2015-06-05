@@ -1,11 +1,16 @@
 <?php
 //TODO: files header
 
-// *** error mode ***
-ini_set('display_errors',1);
-ini_set('display_startup_errors',1);
-error_reporting (E_ERROR | E_WARNING | E_PARSE | E_STRICT);
-//error_reporting(-1);
+// *** database ***
+$db_connect = array(
+    'database_type' => 'mysql',
+    'database_name' => 'PHPC',
+    'server'        => 'localhost',
+    'username'      => 'simple',
+    'password'      => '3s5YeB08ecFlmrOQ',
+    'charset'       => 'utf8',
+    'port'          => 3306,
+    'option'        => array(PDO::ATTR_CASE => PDO::CASE_NATURAL)
+);
 
-autoloader(array('debug' => DEVELOP, 'basepath' => ROOTDIR . 'class'));
 ?>

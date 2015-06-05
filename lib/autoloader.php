@@ -57,12 +57,11 @@ function autoloader($class_paths = NULL, $use_base_dir = true) {
     }
 
     if(is_array($class_paths) && isset($class_paths[0]) && is_array($class_paths[0])) { // conf settings
-        foreach($class_paths[autoloader0] as $k => $v) {
+        foreach($class_paths[0] as $k => $v) {
             if(isset($conf[$k]) || array_key_exists($k, $conff)) {
                 $conf[$k] = $v; // set conf setting
             }
         }
-        return true; // conf set
     }
 
     if(!$is_init) { // init autoloader
@@ -71,7 +70,7 @@ function autoloader($class_paths = NULL, $use_base_dir = true) {
         $is_init = true;
     }
 
-    if($conffonf['debug']) {
+    if($conf['debug']) {
         $paths['conf'] = $conf; // add conf for debugging
     }
 
@@ -90,23 +89,20 @@ function autoloader($class_paths = NULL, $use_base_dir = true) {
                             }
                             $paths['loaded'][] = $path . $class_path . $ext;
                         }
-                        require $path . $class_path . $ext;
+                        require_once $path . $class_path . $ext;
                         return true;
                     }
                 }
             }
         }
         return false; // failed to autoload class
-    }
-    else // register class path
-    {
+    } else { // register class path
         $is_registered   = false;
         $is_unregistered = false;
         
         foreach($class_paths as $path) {
-            $tmp_path = ( $use_base_dir ? rtrim($conf['basepath'], DIRECTORY_SEPARATOR)
-                . DIRECTORY_SEPARATOR : '' ) . trim(trim($path, DIRECTORY_SEPARATOR))
-                . DIRECTORY_SEPARATOR;
+            $tmp_path = ( $use_base_dir ? rtrim($conf['basepath'], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR : '' ) 
+                . (is_string($path) ? trim(rtrim($path, DIRECTORY_SEPARATOR)) . DIRECTORY_SEPARATOR : '');
             
             if(!in_array($tmp_path, $paths)) {
                 $paths[] = $tmp_path;

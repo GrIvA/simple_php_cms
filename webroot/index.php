@@ -9,21 +9,42 @@ if ( !file_exists(LIBDIR . 'config.php') ) {
     die;
 }
 
-require_once LIBDIR . 'declarations.php';
 require_once LIBDIR . 'autoloader.php';
+require_once LIBDIR . 'declarations.php';
 require_once LIBDIR . 'config.php';
 
+//standart rout
+$rout = Router::getInstance();
+$rout->map('GET|POST','/---', '', 'admin');
+$rout->map('GET','/[ln:lang]/[page:page]', 'home#index', 'data');
+$rout->map('GET','/','','start');
+unset($rout);
 
-$router = new Router();
-$router->setBasePath('');
-$router->map('GET|POST','/', 'home#index', 'home');
-$router->map('GET','/users/', array('c' => 'UserController', 'a' => 'ListAction'));
-$router->map('GET','/users/[i:id]', 'users#show', 'users_show');
-$router->map('POST','/users/[i:id]/[delete|update:action]', 'usersController#doAction', 'users_do');
+// compilations
+$compiler = new Compiler;
+$compiler->processGlobalCache();
+$plugins = $compiler->getPreloadPlugins();
+
+foreach($plugins as $plugin) { 
+    //TODO: require pluguns 
+}
+
+$compiler->prepare();
+die('-= INDEX =-');
+foreach($compiler->plugins as $plugin) { require_once $plugin; }
+$scope = $compiler->processBundles();
+$compiler->processTemplate($compiler->template,$scope);
+
+
+
+/*
+//$router = new Router();
+//$lang   = new Languages();
 
 // match current request
 $match = $router->match();
 ?>
+
 <h1>AltoRouter</h1>
 
 <h3>Current request: </h3>
@@ -34,7 +55,6 @@ $match = $router->match();
 </pre>
 
 <h3>Try these requests: </h3>
-<p><a href="<?php echo $router->generate('home'); ?>">GET <?php echo $router->generate('home'); ?></a></p>
-<p><a href="<?php echo $router->generate('users_show', array('id' => 5)); ?>">GET <?php echo $router->generate('users_show', array('id' => 5)); ?></a></p>
-<p><form action="<?php echo $router->generate('users_do', array('id' => 10, 'action' => 'update')); ?>" method="post"><button type="submit"><?php echo $router->generate('users_do', array('id' => 10, 'action' => 'update')); ?></button></form></p>
+<p><a href="<?php echo $router->generate('data', array('lang'=>'en', 'action'=>'forgot_password')); ?>">GET <?php echo $router->generate('data', array('lang'=>'en', 'action'=>'forgot_password')); ?></a></p>
+ */
 ?>
