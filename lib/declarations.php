@@ -34,8 +34,9 @@ autoloader(array(array('debug' => DEVELOP, 'basepath' => ROOTDIR . 'class')));
 if ( !defined('VENDORDIR') )  define('VENDORDIR', ROOTDIR . 'vendors' . DS);
 
 // text
-if ( !defined('GETTEXT_DOMAIN') ) define('GETTEXT_DOMAIN', ROOTDIR . 'locale' . DS);
-if ( !defined('GETTEXT_FOLDER') ) define('GETTEXT_FOLDER', 'messages');
+if ( !defined('CURRENT_LANGUAGE') ) define('CURRENT_LANGUAGE', 1);
+if ( !defined('GETTEXT_FOLDER') ) define('GETTEXT_FOLDER', ROOTDIR . 'locale' . DS);
+if ( !defined('GETTEXT_DOMAIN') ) define('GETTEXT_DOMAIN', 'messages');
 
 // *** init variables ***
 

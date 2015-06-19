@@ -20,6 +20,11 @@ class Database /*extends medoo*/ {
         return  $db->get($table, $field, $conditions);
     }
 
+    public static function select($table, $columns, $where) {
+        $db = self::$_vendor;
+        return $db->select($table, $columns, $where);
+    }
+
     public static function log($only_last = true) {
         $db = self::$_vendor;
         if ($only_last) {

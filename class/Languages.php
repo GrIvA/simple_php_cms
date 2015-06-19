@@ -1,8 +1,15 @@
 <?php
 // *** CLASS ***
 class Languages {
+    const LANGTABLE = 'languages';
 
     private static $instance;
+    private static $_current_language;
+    private static $_languages     = null;
+    private static $_languages_abr = null;
+    private static $_domains = array(
+        'test' => 'test',
+    );
 
     public static function getInstance() {
         if (self::$instance === null) {
@@ -14,6 +21,81 @@ class Languages {
     public static function SetLocalLanguage($lang) {
         self::getInstance();
     }
+
+    public static function translate($text, $domain = null) {
+        self::getInstance();
+        if (is_null(self::$_current_language)) {
+            throw new Exception("Impossible to translate when language has not been set.");
+        }
+                
+        if (is_null($domain)) {
+            return gettext($text);
+        } else {
+            return dgettext(self::$_domains[$domain], $text);
+        }
+    }
+
+    public static function getIDFromAbr($language_abr) {
+        self::getInstance();
+                
+        if (is_null(self::$_languages)) {
+            self::getLanguageData(array());
+        }
+                
+       if (!array_key_exists($language_abr, self::$_languages_abr)) {
+           throw new Exception("Language not found");
+       }
+                
+        return self::$_languages_abr[$language_abr];
+    }
+
+    public static function getLanguageData($conditions=array()) {
+        self::getInstance();
+
+        $db = Database::getInstance();
+
+        $languages = $db->select(self::LANGTABLE, '*', $conditions);
+
+        foreach ($languages as $language) {
+            self::$_languages[$language['id']] = $language;
+            self::$_languages_abr[$language['abr']] = $language['id'];
+        }
+                
+        return array(
+            'total_rows' => count($languages),
+            'instances'  => self::$_languages
+        );
+    }
+
+    public static function setLanguage($language_id) {
+        if (is_null(self::$_languages)) {
+            self::getLanguageData(array());
+        }
+        if (!array_key_exists($language_id, self::$_languages)) {
+            throw new Exception('Unknown language: ' . $language_id);
+        }
+        $language_to_activate = self::$_languages[$language_id];
+                
+        // Set language environment variables
+        putenv('LANG=' . $language_to_activate['language_folder']);
+        putenv('LANGUAGE=' . $language_to_activate['language_folder']);
+        setlocale(LC_ALL, $language_to_activate['language_folder']);
+        setlocale(LC_COLLATE, $language_to_activate['language_folder'] . '.utf8');
+        setlocale(LC_NUMERIC, 'en_US');
+
+        if (isset(self::$_domains) && is_array(self::$_domains)) {
+            foreach (self::$_domains AS $domain) {
+                bindtextdomain($domain, GETTEXT_FOLDER);
+                //TODO: what doing if codeset is not UTF-8?
+                bind_textdomain_codeset($domain, 'UTF-8');
+            }
+        }
+
+        textdomain(GETTEXT_DOMAIN);
+        self::$_current_language = $language_id;
+    }
+
+
 
     // === PRIVATE ===
 
