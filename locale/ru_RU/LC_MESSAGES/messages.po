@@ -1,14 +1,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: simple PHP compiler\n"
-"Language: en_US\n"
+"Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 msgid "fatal_title"
-msgstr "ERROR:"
+msgstr "ОШИБКА:"
 
 msgid "fatal_nostyle"
-msgstr "Can't found project style"
+msgstr "Не найден стиль проекта."

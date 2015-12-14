@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>@( $page.title )</title>
+        <link type="text/css" rel="stylesheet" href="/css/main.css" />
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js" /></script>
+    </head>
+    <body>
+        @include( @( $page.name ), ['param' => @( $parameters )] ) 
+
+        @if( isset($debug) ) 
+            <div id="debug-control">Debug</div>
+            <div id="debug-area">
+                <pre>
+                    @foreach( $debug as $key => $item)
+                        @( $key ) - @( print_r($item, true) )
+                    @endforeach
+                </pre>
+            </div>
+            <script type="text/javascript">
+                $('#debug-control').on('click', function() {
+                    if ($('#debug-area').is(':visible')) {
+                        $('#debug-area').hide();
+                    } else {
+                        $('#debug-area').show();
+                    }
+                });
+                $('#debug-control').trigger('click');
+            </script>
+        @endif
+    </body>
+</html>
+

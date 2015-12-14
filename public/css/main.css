@@ -1,0 +1,21 @@
+body {
+    background-color: #ebebeb;
+    font-family: Arial;
+}
+#debug-control {
+    border-top: 1px solid #bdbdbd;
+    color: #6F624C;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    padding-left: 20px;
+    width: 80%;
+}
+#debug-area {
+    border: 1px solid #bdbdbd;
+    background-color: #fff;
+    width: 82%;
+}
+#debug-area pre {
+    font-size: 12px;
+}

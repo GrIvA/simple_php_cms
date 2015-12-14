@@ -1,0 +1,6 @@
+<p>
+    This is home page
+</p>
+<p>
+    @( $param.about )
+</p>
