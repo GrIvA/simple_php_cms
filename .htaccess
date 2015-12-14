@@ -1,9 +1,0 @@
-<IfModule mod_rewrite.c>
-
-Options -Indexes +FollowSymLinks
-RewriteEngine On
-
-RewriteRule ^admin$ /admin/ [L,R]
-RewriteRule ^member$ /member/ [L,R]
-RewriteRule ^([^.]*[^./])?$ /webroot/index.php [L]
-</IfModule>
