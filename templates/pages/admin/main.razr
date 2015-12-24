@@ -1,0 +1,7 @@
+<p>
+    This is home page
+</p>
+<p>
+    @( $params.header )
+</p>
+
