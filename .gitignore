@@ -3,4 +3,6 @@
 
 # temp directory
 /temp
+/templates/cache
 /.tags
+/index_list

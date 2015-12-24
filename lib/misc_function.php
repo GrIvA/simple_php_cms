@@ -106,10 +106,12 @@ function useTemplate($file_name, $layout)
 {
     if (!empty($file_name)) {
         if (!is_file(ROOTDIR . 'models/pages/' . $file_name . '.php')) {
+            throw new Exception('This page file not exists, ' . $file_name . '.php');
             return;
         }
 
         if (!is_file(ROOTDIR . 'templates/pages/' . $file_name . '.razr')) {
+            throw new Exception('This template file not exists, ' . $file_name . '.razr');
             return;
         }
 
