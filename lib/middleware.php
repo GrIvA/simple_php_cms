@@ -1,7 +1,6 @@
 <?php
 $app->add(function ($request, $response, $next) use ($app) {
     $uri = $request->getUri();
-    if ($uri->getPath() == '/main.css') die('MAIN is this...');
     $elements = explode('/', $uri->getPath());
 
     //drop empty elements

@@ -1,32 +1,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-    <head>
-        <title>@( $page.title )</title>
-        @include('common/css.razr')
-        @include('common/js.razr')
-    </head>
-    <body>
-        @include( @( $page.name ), ['params' => $parameters] ) 
+<head>
+    <title>@( $page.title )</title>
+    <link type="text/css" rel="stylesheet" href="/css/admin/main.css" />
 
-        @if( isset($debug) ) 
-            <div id="debug-control">Debug</div>
-            <div id="debug-area">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.js"></script>
+</head>
+<body ng-app="main">
+    <script type="text/javascript">
+        var angular_admin = angular.module('main', ['ngRoute']);
+    </script>
+
+    <div class="admin_header_wrapper">
+        @include( @( $page.header_menu ) )
+    </div>
+    <div class="admin_content_wrapper">
+        @include( @( $page.name ), ['params' => $parameters] ) 
+    </div>
+
+    <!-- Debugger -->
+    @if( isset($debug) ) 
+        <div ng-controller="AdminDebugController">
+            <div id="debug-control" ng-click="toggle()">Debug</div>
+            <div id="debug-area" ng-show="state">
                 <pre>
                     @foreach( $debug as $key => $item)
-                        @( $key ) - @( print_r($item, true) )
+                        <br />@( $key ) - @( print_r($item, true) )
                     @endforeach
                 </pre>
             </div>
-            <script type="text/javascript">
-                $('#debug-control').on('click', function() {
-                    if ($('#debug-area').is(':visible')) {
-                        $('#debug-area').hide();
-                    } else {
-                        $('#debug-area').show();
-                    }
-                });
-                $('#debug-control').trigger('click');
-            </script>
-        @endif
-    </body>
+        </div>
+        <script type="text/javascript">
+            angular_admin.controller('AdminDebugController', ['$scope', function($scope) {
+                $scope.state = 0;
+                $scope.toggle = function() {
+                    $scope.state = ++$scope.state % 2;
+                };
+            }]);
+        </script>
+    @endif
+</body>
 </html>

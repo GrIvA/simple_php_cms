@@ -1,0 +1,17 @@
+<div class="admin_content_wrapper">
+    <ul class="header_menu_wrapper" ng-controller="AdminHeaderMenuController">
+        <li ng-click="dbStart()">databases</li>
+        <li ng-click="languageStart()">languages</li>
+    </ul>
+</div>
+<script>
+angular_admin.controller('AdminHeaderMenuController', ['$scope', function($scope) {
+    $scope.dbStart = function() {
+        window.open('/adminer.php');
+    };
+
+    $scope.languageStart = function() {
+        alert(333);
+    };
+}]);
+</script>

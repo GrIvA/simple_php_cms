@@ -1,0 +1,66 @@
+body {
+    background-color: #ebebeb;
+    background-image: url('/images/admin/fon.jpg');
+    font-family: Arial;
+    margin: 0px;
+}
+.admin_header_wrapper {
+    height: 40px;
+    background: rgba(237,237,237,1);
+    background: -moz-linear-gradient(top, rgba(237,237,237,1) 0%, rgba(230,230,230,1) 8%, rgba(230,230,230,1) 91%, rgba(214,214,214,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(237,237,237,1)), color-stop(8%, rgba(230,230,230,1)), color-stop(91%, rgba(230,230,230,1)), color-stop(100%, rgba(214,214,214,1)));
+    background: -webkit-linear-gradient(top, rgba(237,237,237,1) 0%, rgba(230,230,230,1) 8%, rgba(230,230,230,1) 91%, rgba(214,214,214,1) 100%);
+    background: -o-linear-gradient(top, rgba(237,237,237,1) 0%, rgba(230,230,230,1) 8%, rgba(230,230,230,1) 91%, rgba(214,214,214,1) 100%);
+    background: -ms-linear-gradient(top, rgba(237,237,237,1) 0%, rgba(230,230,230,1) 8%, rgba(230,230,230,1) 91%, rgba(214,214,214,1) 100%);
+    background: linear-gradient(to bottom, rgba(237,237,237,1) 0%, rgba(230,230,230,1) 8%, rgba(230,230,230,1) 91%, rgba(214,214,214,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#d6d6d6', GradientType=0 );
+     )
+    -webkit-box-shadow: 0px 10px 17px -4px rgba(0,0,0,0.45);
+    -moz-box-shadow: 0px 10px 17px -4px rgba(0,0,0,0.45);
+    box-shadow: 0px 10px 17px -4px rgba(0,0,0,0.45);
+
+}
+.admin_content_wrapper {
+    width: 960px;
+    margin: auto;
+}
+
+/* header */
+.header_menu_wrapper {
+    margin: 0px;
+    padding: 0px;
+}
+.header_menu_wrapper li:hover {
+    background-color: #aaa;
+}
+.header_menu_wrapper li {
+    display: inline-block;
+    border-radius: 0px 10px 0px 10px;
+    -moz-border-radius: 0px 10px 0px 10px;
+    -webkit-border-radius: 0px 10px 0px 10px;
+    border: 6px double #e6e6e6;
+    background-color: rgb(178, 178, 178);
+    color: #fff;
+    padding: 3px;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+/* debug */
+#debug-control {
+    border-top: 1px solid #bdbdbd;
+    color: #6F624C;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    padding-left: 20px;
+    width: 80%;
+}
+#debug-area {
+    border: 1px solid #bdbdbd;
+    background-color: #fff;
+    width: 82%;
+}
+#debug-area pre {
+    font-size: 12px;
+}
