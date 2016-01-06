@@ -12,9 +12,12 @@
         var angular_admin = angular.module('main', ['ngRoute']);
     </script>
 
+    <!-- header -->
     <div class="admin_header_wrapper">
         @include( @( $page.header_menu ) )
     </div>
+
+    <!-- content -->
     <div class="admin_content_wrapper">
         @include( @( $page.name ), ['params' => $parameters] ) 
     </div>

@@ -5,13 +5,13 @@
     </ul>
 </div>
 <script>
-angular_admin.controller('AdminHeaderMenuController', ['$scope', function($scope) {
+angular_admin.controller('AdminHeaderMenuController', ['$scope', '$location', function($scope, $location) {
     $scope.dbStart = function() {
         window.open('/adminer.php');
     };
 
     $scope.languageStart = function() {
-        alert(333);
+        $location.path('/lang');
     };
 }]);
 </script>
