@@ -3,6 +3,11 @@ $app->add(function ($request, $response, $next) use ($app) {
     $uri = $request->getUri();
     $elements = explode('/', $uri->getPath());
 
+    if (in_array('ajax', $elements)) {
+        $response = $next($request, $response);
+        return $response;
+    }
+
     //drop empty elements
     array_walk($elements, function ($value, $key) use (&$elements) {
         if (empty($value)) {
@@ -15,7 +20,6 @@ $app->add(function ($request, $response, $next) use ($app) {
     //set language
     $language = isset($elements[0]) && strlen($elements[0]) == 2
         ? array_shift($elements) : '';
-
 
     $c = getUserCollection($app);
     $storage = $c['session'];

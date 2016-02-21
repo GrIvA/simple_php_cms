@@ -1,1 +1,3 @@
-'<p>=-=-=-=-=-=-=-=-=-=-=</p>'
+[
+    '<div tree-view="structure" tree-view-options="options"></div>'
+].join('')

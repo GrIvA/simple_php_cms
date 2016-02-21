@@ -1,4 +1,10 @@
 <?php
+$app->map(['GET', 'POST'], '/ajax/{name:.+}', function ($request, $response, $args) use ($app) {
+    if (true || $request->isXhr()) {
+        require_once ROOTDIR . 'models' . DS . 'ajax' . DS . $args['name'];
+    }
+});
+
 $app->get('/main', function () use ($app) {
     $c = getUserCollection($app);
     $storage = $c['session'];

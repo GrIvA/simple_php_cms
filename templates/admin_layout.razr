@@ -3,15 +3,16 @@
 <head>
     <title>@( $page.title )</title>
     <link type="text/css" rel="stylesheet" href="/css/admin/main.css" />
+    <link type="text/css" rel="stylesheet" href="/css/tree_view.css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.js"></script>
+    <script src="/js/angular/services/batch_log.js"></script>
+    <script src="/js/angular/services/ajax_request.js"></script>
+    <script src="/js/angular/services/admin_service.js"></script>
+    <script src="/js/angular/tree_view.js"></script>
 </head>
 <body ng-app="main">
-    <script type="text/javascript">
-        var angular_admin = angular.module('main', ['ngRoute']);
-    </script>
-
     <!-- header -->
     <div class="admin_header_wrapper">
         @include( @( $page.header_menu ) )
@@ -35,12 +36,14 @@
             </div>
         </div>
         <script type="text/javascript">
-            angular_admin.controller('AdminDebugController', ['$scope', function($scope) {
-                $scope.state = 0;
-                $scope.toggle = function() {
-                    $scope.state = ++$scope.state % 2;
-                };
-            }]);
+            angular_admin.controller('AdminDebugController', ['$scope', 'batchLog', 'adminService',
+                function($scope, batchLog, adminService) {
+                    $scope.state = 0;
+                    $scope.toggle = function() {
+                        $scope.state = ++$scope.state % 2;
+                    };
+                }
+            ]);
         </script>
     @endif
 </body>
