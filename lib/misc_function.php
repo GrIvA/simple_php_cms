@@ -117,7 +117,7 @@ function useTemplate($file_name, $layout)
 
         $razr = new Razr\Engine(
             new Razr\Loader\FilesystemLoader(ROOTDIR . 'templates'),
-            ROOTDIR . 'templates/cache'
+            DEVELOP ? null : ROOTDIR . 'templates/cache'
         );
 
         echo $razr->render(

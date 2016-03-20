@@ -4,7 +4,6 @@
      ng-init="
          setKey('langAjax', '/ajax/admin/language.js');
          adminService.setKey('qqqq', 'wwwwwww');
-         alert(345473);
 ">
     <div ng-view></div>
 </div>
@@ -32,8 +31,6 @@
     angular_admin.controller('AdminMainController', ['$scope', 'adminService', function($scope, adminService) {
             adminService.retrieve();
             adminService.setKey('langAjax', 'ajax/admin/language.php');
-
-            console.log('init Admin main controller');
     }]);
 
     angular_admin.controller('AdminLanguageController', ['$scope', 'adminService', function($scope, adminService) {
@@ -43,7 +40,21 @@
             adminService.getAjax(
                 {operation: 'get/files', value1: 'value1', value2: 'value2'},
                 function(response) {
-                    console.log(response);
+                    console.log('-= admin/main.razr =-');
+
+                    return  {folders: [{
+                        name: 'Folder 1',
+                        files: [
+                            {name: 'File 1.jpg'},
+                            {name: 'File 2.png'}
+                        ],
+                        folders: [
+                            {name: 'Subfolder 1', files: [{name: 'Subfile 1'}]},
+                            {name: 'Subfolder 2'},
+                            {name: 'Subfolder 3'}
+                        ]},
+                        {name: 'Folder 2'}
+                    ]};
                 }
             );
         }

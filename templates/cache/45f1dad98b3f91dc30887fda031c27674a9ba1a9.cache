@@ -1,6 +1,0 @@
-<?php /* pages/home.razr */ extract(array (  'param' => NULL,), EXTR_SKIP) ?><p>
-    This is home page
-</p>
-<p>
-    <?php echo $this->escape(( $this->getAttribute($param, 'about') ) ) ?>
-</p>

@@ -20,11 +20,9 @@ class Handler
      * @param \Closure $declaration group and command initialization
      * @param array $after list of middleware than will be execute after the command
      */
-    public function middleware($before, \Closure $declaration, $after = [])
+    public function middleware($before = [], \Closure $declaration, $after = [])
     {
-        dbg('----####------');
         $current_middleware = $this->middleware;
-        die(dbg($current_middleware));
         if (!$current_middleware instanceof Middleware) {
             $this->middleware = new Middleware($before, $after);
         } else {
@@ -49,9 +47,9 @@ class Handler
         }
         array_push($this->group, $path);
         if ($callback instanceof \Closure) {
-            $callback = $callback->bindTo($this, $this);
+            $bind_callback = $callback->bindTo($this, $this);
+            call_user_func_array($bind_callback, $parameters);
         }
-        call_user_func_array($callback, $parameters);
         array_pop($this->group);
     }
 
